@@ -3,7 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt= require('bcrypt-nodejs');
-const knex = require('knex')
+const dotenv = require('dotenv');
+const knex = require('knex');
+
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -14,7 +16,7 @@ const db= knex({
   client: 'pg',
   connection: {
   	connectionString : process.env.DATABASE_URL,
-    ssl: true,
+    ssl: false,
   }
 });
 
@@ -30,5 +32,5 @@ app.post('/imageurl', (req, res) => {image.handleApiCall(req, res)});
 app.get('/profile/:id', (req, res) => {profile.handleProfileGet(req, res, db)});
   
 
-app.listen(process.env.PORT || 3000, () => console.log(`Example app listening on port ${process.env.PORT}!`))
+app.listen(process.env.PORT || 7000, () => console.log(`Example app listening on port ${process.env.PORT}!`))
 
